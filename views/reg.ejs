@@ -1,0 +1,15 @@
+<%- include header %>
+<% if (success) { %>
+  <div><%= success %></div>
+<% } %>
+<% if (error) { %>
+  <div><%= error %> </div>
+<% } %>
+<form method="post">
+  Username：  <input type="text" name="name"/><br />
+  Password：    <input type="password" name="password"/><br />
+  Retype Password：<input type="password" name="password-repeat"/><br />
+  Email：    <input type="email" name="email"/><br />
+           <input type="submit" value="注册"/>
+</form>
+<%- include footer %>
