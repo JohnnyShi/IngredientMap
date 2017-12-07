@@ -63,3 +63,11 @@ The height and width shoud use absolute value.
 
 Also, notice that if I use `navbar-fixed-top` class as the nav bar style, then it will cover the contents of the top page. To solve this, simply add `padding-top` of 65px to `body`.
 
+### 12/07/2017
+
+Learn to align elements in css. 
+
+With this link, <https://css-tricks.com/centering-css-complete-guide/>, you can align both vertically and horizontally for any inline or block elements.
+
+
+

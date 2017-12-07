@@ -21,7 +21,7 @@
   					</button>
   					<a href="/" class="navbar-brand">
   						<span><img src="/images/brand/logo.svg" alt=""></span>
-  						ingredientMap
+  						&nbsp; ingredientMap
   					</a>
   				</div>
   				<div id="navbar" class="collapse navbar-collapse">
@@ -33,10 +33,10 @@
   					<ul id="navbar-right" class="nav navbar-nav navbar-right">
   						<% if (user) { %>
       						<li><a><%= user.name %></a></li>
-  							<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+  							<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
     					<% } else { %>
-      						<li><a href="/reg"><span class="glyphicon glyphicon-user"></span>Sign up</a></li>
-  							<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+      						<li><a href="/reg"><span class="glyphicon glyphicon-user"></span> Sign up </a></li>
+  							<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
     					<% } %>
     				</ul>
   				</div>

@@ -8,13 +8,13 @@ body {
 }
 
 .navbar-brand {
-	margin:0px;
-	padding:5px;
+  display:flex;
+  align-items:center;
 }
+
 .navbar-brand span img {
 	height: 30px;
 	width: 30px;
-	vertical-align: middle;
 }
 /*body {
 	width:600px;
