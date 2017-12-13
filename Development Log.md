@@ -123,7 +123,7 @@ HTML form validation is based on two CSS pseudo-classes, `:invalid` and `:valid`
 
 For client validation, it is more user-friendly to check validation dynamically.
 
-
+In a js file, First we define a prototype of 
 
 
 
@@ -209,3 +209,14 @@ two.__proto__ === Object.prototype // true
 #### setCustomValidity
 
 The `HTMLSelectElement.setCustomValidity()` method sets the custom validity message for the selection element to the specified message. Use the empty string to indicate that the element does *not* have a custom validity error.
+
+
+
+#### 12/11/2017
+
+Set mongodb database on mLab
+
+Since on mLab, a free mongodb database is in a shared plan, which means we are not the admin of this database, which limits our usage in the database `ingredientmap` itself, and that's why some instructions work locally but not online. If it shows `not authoriszed on *** to execute command`, probably you work beyond your own database.
+
+
+

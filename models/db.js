@@ -1,7 +1,12 @@
-var settings = require('../settings'),
-    Db = require('mongodb').Db,
-    Connection = require('mongodb').Connection,
-    Server = require('mongodb').Server;
+const MongoClient = require('mongodb').MongoClient;
+const mongoURI = 'mongodb://johny:abk123321@ds135926.mlab.com:35926/ingredientmap';
+var db;
 
-module.exports = new Db(settings.db, new Server(settings.host, settings.port),
- {safe: true});
+module.exports = {
+	connectToServer: function(callback){
+		MongoClient.connect(mongoURI, function(err, database){
+			module.exports.db = database;
+			callback(err);
+		});
+	}
+}

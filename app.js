@@ -5,10 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var settings = require('./settings');
 var flash = require('connect-flash');
-
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
@@ -27,25 +24,40 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// store session in mongodb
 app.use(session({
-  secret: settings.cookieSecret,
-  key: settings.db,//cookie name
-  cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
-  resave: false,
-  saveUninitialized: false,
-  store: new MongoStore({
-    db: settings.db,
-    host: settings.host,
-    port: settings.port,
-    url: 'mongodb://localhost:27017/ingredientMap'
-  })
+    secret: 'a4f8071f-c873-4447-8ee2',
+    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+        storage: 'mongodb',
+        db: 'ingredientMap',
+        collection: 'sessions',
+        url: 'mongodb://johny:abk123321@ds135926.mlab.com:35926/ingredientmap'
+    })
 }));
 
-routes(app);
+// routing function
+function routing(){
+    var routes = require('./routes/index');
+    routes(app);
+}
 
+var mongo = require('./models/db');
+
+function connect(callback){
+    mongo.connectToServer( function( err ) {
+        if (err){
+            throw err;
+        }
 // app.listen(app.get('port'), function() {
 //   console.log('Express server listening on port ' + app.get('port'));
 // });
-app.listen(process.env.PORT || 5000);
+        app.listen(process.env.PORT || 5000);
+        callback();
+    });
+}
+connect(routing);
 
 module.exports = app;
