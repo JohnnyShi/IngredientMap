@@ -43,12 +43,12 @@ body {
 }
 
 #password, #password_repeat{
-	padding-right: 20px;
+	padding-right: 22px;
 }
 .capsLockIcon{
 	position: relative;
 	float: right;
-    margin-right: 6px;
+    margin-right: 8px;
     margin-top: -24px;
     z-index: 1;
     color: grey;
