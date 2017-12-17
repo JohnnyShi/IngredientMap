@@ -1,5 +1,7 @@
 var crypto = require('crypto');
 var User = require('../models/user.js');
+var request = require('request');
+var bodyParser = require('body-parser');
 
 var fs = require('fs');
 const defaultImgDir = './public/images/portraits/';
@@ -37,7 +39,26 @@ module.exports = function(app) {
         var name = req.body.name,
         password = req.body.password,
         password_re = req.body['password-repeat'],
-        imgUrl = getImgUrl();
+        imgUrl = getImgUrl(),
+        recaptcha = req.body['g-recaptcha'];
+
+        //check racaptcha
+        if (recaptcha === undefined || recaptcha === '' || recaptcha === null){
+            return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"})
+        }
+        var secretKey = "6Lcq0TwUAAAAALFsshRJr6ypSZ50OzlPUUj4ufwV";
+        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey 
+        + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+
+        // Hitting GET request to the URL, Google will respond with success or error scenario.
+        request(verificationUrl,function(error,response,body) {
+            body = JSON.parse(body);
+            // Success will be true or false depending upon captcha validation.
+            if(body.success !== undefined && !body.success) {
+                return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
+            }
+            res.json({"responseCode" : 0,"responseDesc" : "Success"});
+        });
 
         //check if these two passwords are the same.
         if (password_re != password) {
