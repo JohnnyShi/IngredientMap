@@ -41,7 +41,8 @@ module.exports = function(app) {
         password_re = req.body['password-repeat'],
         imgUrl = getImgUrl(),
         recaptcha = req.body['g-recaptcha'];
-
+        console.log(recaptcha);
+        console.log(req.body);
         //check racaptcha
         if (recaptcha === undefined || recaptcha === '' || recaptcha === null){
             return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"})
