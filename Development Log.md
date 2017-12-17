@@ -123,9 +123,40 @@ HTML form validation is based on two CSS pseudo-classes, `:invalid` and `:valid`
 
 For client validation, it is more user-friendly to check validation dynamically.
 
-In a js file, First we define a prototype of 
+In a js file, First we define a prototype of function `CustomValidation`, which is a function that takes in the content of an input element, then find what kind of validityCheck to perform, collect the invalid information, then add a listener.
 
+```
+function CustomValidation(input){
+	this.invalidities = []; // array of invalid messages
+	this.validityChecks = []; // items to be checked
+	this.inputNode = input; // add reference to the input node
+	this.registerListener(); // trigger method to attach the listener
+}
+```
 
+After that, add method to this prototype:
+
+```
+CustomValidation.prototype = {
+  	addInvalidity:function(message){},//push into array
+  	getInvalidity:function(message){},//get a string with '/n'
+  	checkInvalidity:function(input){},//add valid or invalid class to <li> element
+  	checkInput:function(){},//use build-in setCustomValidity function to show invalidity message
+  	registerListener:function(){}//add keyup listener to call checkInput()
+}
+```
+
+And next step, is to define the input array to be checked. Each element in the array has three things:
+
+```
+{
+  	isInvalid:function(input){},
+  	invalidityMessage: '',
+  	element: //the <li> element to be checked
+}
+```
+
+Then finally, for each usernameInput, passwordInput and so on, create CustomValidation on them and use corresponding input array. Also, add listener to double check when submit the form.
 
 #### Difference between id and name attribute
 
@@ -218,5 +249,136 @@ Set mongodb database on mLab
 
 Since on mLab, a free mongodb database is in a shared plan, which means we are not the admin of this database, which limits our usage in the database `ingredientmap` itself, and that's why some instructions work locally but not online. If it shows `not authoriszed on *** to execute command`, probably you work beyond your own database.
 
+#### Connect mongodb
+
+There are two ways to open/connect to the mongodb server.
+
+1. Export a db instance, then open and close for each operation
+
+In a `mongo.js` file, exporting a database object to use in other files.
+
+```
+module.exports = new Db(settings.db, new Server(settings.host, settings.port),{safe: true}); 
+```
+
+Typically this is used locally, in which `settings.db` is the db name, `host` is `localhost`, and port is `27017`. After that, just `var mongodb = require('mongo.js')` then it can be used in other files.
+
+But obviously, the `connect` operation costs too much, and typically to use in an online site, it should open the connection only once and link to an online host.
+
+2. Export function, connect in the `app.js`, then use db in other files.
+
+In `mongo.js` file, exporting functions use mongoClient:
+
+```
+const MongoClient = require('mongodb').MongoClient;
+const mongoURI = 'mongodb://username:password@ds135926.mlab.com:35926/ingredientmap';
+
+module.exports = {
+	connectToServer: function(callback){
+		MongoClient.connect(mongoURI, function(err, database){
+			module.exports.db = database;
+			callback(err);
+		});
+	}
+}
+```
+
+After that, in `app.js` file, connect to database, and remember to put synchronization codes in a callback function, because the connection needs to be opened before accessing db object:
+
+```
+// routing function
+function routing(){
+    var routes = require('./routes/index');
+    routes(app);
+}
+
+var mongo = require('./models/db');
+
+function connect(callback){
+    mongo.connectToServer( function( err ) {
+        if (err){
+            throw err;
+        }
+        app.listen(process.env.PORT || 5000);
+        callback();
+    });
+}
+connect(routing);
+```
+
+After that, access the db object in other files:
+
+```
+var mongo = require('./db');
+var mongodb = mongo.db;
+//open users collection
+    mongodb.collection('users', function (err, collection) {
+        if (err) {
+            return callback(err);
+        }
+        //insert user
+        collection.insert(user, {safe: true}, function (err, user) {
+            if (err) {
+                return callback(err);
+            }
+            callback(null, user[0]);//successful! err = null, return collection
+        });
+    });
+```
+
+3. In the future project, I may try `mongoose` or other modules, but for now I use the native mongo client.
+
+#### Cookie Session
 
 
+
+#### 12/13/2017
+
+#### Relative path and Absolute path in express
+
+There are 5 types of file path in node, including `__dirname`, `__filename`, `process.cwd()`, `./` and `../`, among which the first three are absolute, and the rest are relative path.
+
+`__dirname` always returns the absolute path of the directory of the executed file, and `__filename` always returns the path of the executed file.
+
+`process.cwd()` returns the path of the directory when running the `node` command.
+
+In node, when using `require()`, the `./` locates in `__dirname`, while for other circumstance, `./` locates in the same place as `process.cwd()`.
+
+
+
+#### 12/15/2017
+
+#### HTML Self close tag
+
+In HTML5, tags like `link`, `img`, `br` are self-closing tags, which has no use to add the `/`, and should not be added
+
+#### Float an element
+
+When implementing moving the caps lock icon in the input box, I first use `float: right` to align the icon at the right border, then move the icon up. Now, if I only set `top: -5px` and `right: -5px`, the block moves up, but due to the ability of float, it will pass around the input block and append to the right. To achieve our goal, we modify the margin-top as negative value to move it up, then using the border with the same direction of the float, aka positive right value. And since we also set `position:relative`, it will cover the background input block.
+
+To move an element over another one, it's conveneint to use `float` + `margin-top` / `margin-right`.
+
+#### event and originalEvent in jQuery
+
+In a jQuery function, like:
+
+```
+$('.mask').on('wheel', function (event) {
+    let offset = event.deltaY
+    ...
+}) 
+```
+
+It will alert 'event does not have the deltaY attribute'.
+
+That's because event in jQuery is not exactly like the original event object. And to visit the original event element, using:
+
+```
+let offset = event.originalEvent.deltaY
+```
+
+#### Check keyboard key
+
+`keypress` only detects keys that generates numbers or characters, while `keyup` and `keydown` are more generally.
+
+To check whether a specific key is pressed on keyboard, use `event.getModifierState(key)`. The `keycode` and `charcode` attributes are deprecated, instead using `key` and `code` in string format. 

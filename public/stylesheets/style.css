@@ -5,12 +5,19 @@
 }
 
 body { 
-    padding-top: 65px; 
+    padding-top: 65px;
+    padding-left: 30px; 
 }
 
+/*navigation bar*/
 .navbar-brand {
     display:flex;
     align-items:center;
+}
+
+.navbar-right{
+	display: flex;
+	align-items:center;
 }
 
 .navbar-brand span img {
@@ -18,11 +25,37 @@ body {
 	width: 30px;
 }
 
+#portrait {
+	height: 30px;
+	width: 30px;
+}
+
+/*registration form*/
 .reg-form {
 	max-width: 50%;
 	margin: 70px auto;
 }
 
+/*login form*/
+.login-form{
+	max-width: 50%;
+	margin: 70px auto;
+}
+
+#password, #password_repeat{
+	padding-right: 20px;
+}
+.capsLockIcon{
+	position: relative;
+	float: right;
+    margin-right: 6px;
+    margin-top: -24px;
+    z-index: 1;
+    color: grey;
+    visibility: hidden;
+}
+
+/*validation check*/
 .input-requirements {
   	font-size: 1.3rem;
   	font-style: italic;
@@ -68,14 +101,11 @@ input:not([type="submit"]):active + .input-requirements {
   transition: max-height 1s ease-in;
 }
 
-
-
+/*footer*/
 .footer {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    padding: 1rem;
-    background-color: #efefef;
+    height:50px;
+    margin:-50px 0 0;
+    background:#ddd;
 }
 
 

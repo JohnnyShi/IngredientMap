@@ -5,6 +5,7 @@ function User(user) {
     this.name = user.name;
     this.password = user.password;
     this.email = user.email;
+    this.imgUrl = user.imgUrl;
 };
 
 module.exports = User;
@@ -14,7 +15,8 @@ User.prototype.save = function(callback) {
     var user = {
         name: this.name,
         password: this.password,
-        email: this.email
+        email: this.email,
+        imgUrl: this.imgUrl
     };
     //open users collection
     mongodb.collection('users', function (err, collection) {
