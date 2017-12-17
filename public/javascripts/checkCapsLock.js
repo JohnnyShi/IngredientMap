@@ -21,6 +21,4 @@ $("#password, #password_repeat").on({
 			$(this).next().css("visibility", "hidden");
 		}
 	}
-})
-
-e
+});

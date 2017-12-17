@@ -62,21 +62,7 @@
     	</div>
 	</form>
 </div>
-<script src="/javascripts/register.js"></script>
-<script>
-	$(document).ready(function() {
-      	$('#reg_form').submit(function() {
-        	$(this).ajaxSubmit({
-          		error: function(xhr) {
-            		status('Error: ' + xhr.status);
-          		},
-         		success: function(response) {
-          			console.log(response);
-         		}
-        	});
-        //Very important line, it disable the page refresh.
-        return false;
-      	});
-    });
-</script>
 <%- include footer %>
+<script src="/javascripts/register.js"></script>
+<script src="/javascripts/checkCapsLock.js"></script>
+<script src="/javascripts/recaptcha.js"></script>
