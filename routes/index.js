@@ -48,7 +48,7 @@ module.exports = function(app) {
         }
 
         // secret key
-        const secretKey = "6LdYZD0UAAAAAC8Hog2Ynvoo6w8U1HR7PXWtaBjZ"; //localhost
+        const secretKey = "6Lcq0TwUAAAAALFsshRJr6ypSZ50OzlPUUj4ufwV"; //localhost
 
         // verify url
         var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey 
