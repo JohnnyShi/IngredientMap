@@ -1,7 +1,6 @@
 var crypto = require('crypto');
 var User = require('../models/user.js');
 var request = require('request');
-var bodyParser = require('body-parser');
 
 var fs = require('fs');
 const defaultImgDir = './public/images/portraits/';
@@ -38,27 +37,32 @@ module.exports = function(app) {
     app.post('/reg', function (req, res) {
         var name = req.body.name,
         password = req.body.password,
-        password_re = req.body['password-repeat'],
+        password_re = req.body['password_repeat'],
         imgUrl = getImgUrl(),
-        recaptcha = req.body['g-recaptcha'];
-        console.log(recaptcha);
-        console.log(req.body);
+        recaptcha = req.body['g-recaptcha-response'];
+
         //check racaptcha
         if (recaptcha === undefined || recaptcha === '' || recaptcha === null){
-            return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"})
+            req.flash('error', 'please select recaptcha');
+            return res.redirect('/reg'); 
         }
-        var secretKey = "6Lcq0TwUAAAAALFsshRJr6ypSZ50OzlPUUj4ufwV";
+
+        // secret key
+        const secretKey = "6LdYZD0UAAAAAC8Hog2Ynvoo6w8U1HR7PXWtaBjZ"; //localhost
+
+        // verify url
         var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey 
-        + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+        + "&response=" + recaptcha + "&remoteip=" + req.connection.remoteAddress;
 
         // Hitting GET request to the URL, Google will respond with success or error scenario.
         request(verificationUrl,function(error,response,body) {
             body = JSON.parse(body);
+
             // Success will be true or false depending upon captcha validation.
             if(body.success !== undefined && !body.success) {
-                return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
+                req.flash('error', 'failed recaptcha identification');
+                return res.redirect('/reg'); 
             }
-            res.json({"responseCode" : 0,"responseDesc" : "Success"});
         });
 
         //check if these two passwords are the same.

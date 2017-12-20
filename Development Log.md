@@ -382,3 +382,8 @@ let offset = event.originalEvent.deltaY
 `keypress` only detects keys that generates numbers or characters, while `keyup` and `keydown` are more generally.
 
 To check whether a specific key is pressed on keyboard, use `event.getModifierState(key)`. The `keycode` and `charcode` attributes are deprecated, instead using `key` and `code` in string format. 
+
+#### 12/18/2017
+
+#### fetch vs ajax
+

@@ -1,14 +1,9 @@
-$(document).ready(function() {
-  	$('#reg_form').submit(function() {
-    	$(this).ajaxSubmit({
-      		error: function(xhr) {
-        		status('Error: ' + xhr.status);
-      		},
-     		success: function(response) {
-      			console.log(response);
-     		}
-    	});
-    //Very important line, it disable the page refresh.
-    return false;
-  	});
-});
+function validateRecaptcha(){
+	var g_response = grecaptcha.getResponse();
+	if (g_response.length !== 0){
+        return true;
+    } else{
+        document.getElementById('g-recaptcha-error').innerHTML = '<li>please select recaptcha</li>';
+        return false;
+    }
+}

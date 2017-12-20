@@ -84,6 +84,17 @@ var usernameValidityChecks = [
 	}
 ];
 
+var emailValidityChecks = [
+	{
+		isInvalid: function(input){
+			// var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			// return !re.test(input.toString().toLowerCase());
+			return false;
+		},
+		invalidityMessage: 'Please input a valid email'
+	}
+]
+
 var passwordValidityChecks = [
 	{
 		isInvalid: function(input){
@@ -139,11 +150,15 @@ var passwordRepeatValidityChecks = [
 ----------------------------------*/
 
 var usernameInput = document.getElementById('username');
+var emailInput = document.getElementById('email');
 var passwordInput = document.getElementById('password');
 var passwordRepeatInput = document.getElementById('password_repeat');
 
 usernameInput.CustomValidation = new CustomValidation(usernameInput);
 usernameInput.CustomValidation.validityChecks = usernameValidityChecks;
+
+emailInput.CustomValidation = new CustomValidation(emailInput);
+emailInput.CustomValidation.validityChecks = emailValidityChecks;
 
 passwordInput.CustomValidation = new CustomValidation(passwordInput);
 passwordInput.CustomValidation.validityChecks = passwordValidityChecks;
@@ -151,20 +166,24 @@ passwordInput.CustomValidation.validityChecks = passwordValidityChecks;
 passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
 passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
 
+
+
 /*----------------------------------
 	Event Listeners
 ----------------------------------*/
 
 var inputs = document.querySelectorAll('input:not([type="submit"])'); //select elements that do not match given selector
-var submit = document.querySelector('input[type="submit"]');
-var form = document.getElementById('reg-form');
+// var submit = document.querySelector('button[type="submit"]');
+// var form = document.getElementById('reg_form');
 
-function validate(){
+function formValidate(){
 	for (var i = 0; i < inputs.length; i++){
 		inputs[i].CustomValidation.checkInput();
 	}
+	return validateRecaptcha();
 }
-if (submit){
-	submit.addEventListener('click', validate);
-	form.addEventListener('submit', validate);
-}
+
+// if (submit){
+// 	submit.addEventListener('click', validate);
+// 	form.addEventListener('submit', validate);
+// }

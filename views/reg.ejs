@@ -6,7 +6,7 @@
   <div><%= error %> </div>
 <% } %>
 <div class="container">
-	<form class="reg-form form-horizontal" method="post" id="reg_form">
+	<form class="reg-form form-horizontal" id="reg_form" method="post" onsubmit="return formValidate()">
 		<h2>Sign up</h2>
 		<hr/>
 		<div class="form-group" id="username_div">
@@ -43,18 +43,15 @@
 		<div class="form-group" id="password_repeat_div">
 			<label class="control-label col-sm-2" for="password_repeat">Retype Password:</label>
 			<div class="col-sm-10">
-				<input type="password" class="form-control" id="password_repeat" name="password-repeat" placeholder="Retype Password" required/>
+				<input type="password" class="form-control" id="password_repeat" name="password_repeat" placeholder="Retype Password" required/>
 				<i class="fa fa-upload capsLockIcon" aria-hidden="true"></i>
 			</div>
 		</div>
-		<!--
 		<div class="form-group">
-			<div>
-				<button class="g-recaptcha" data-sitekey="6LekzTwUAAAAAHdnUBFyDSuAK-21EFKpy730SANO" data-callback="YourOnSubmitFn">Submit</button>
-			</div>
+			<div class="g-recaptcha col-sm-10" data-sitekey="6LdYZD0UAAAAAAPBZ4zd2EpdvUwyjpL6l0I3MWDc"></div>
+			<ul id="g-recaptcha-error">
+			</ul>
 		</div>
-		-->
-		<div class="g-recaptcha" data-sitekey="6Lcq0TwUAAAAAJtDK8FHv0Cds8enZq3Y8ClaFZ5n"></div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
     			<button type="submit" class="btn btn-default">Submit</button>
