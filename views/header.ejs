@@ -2,47 +2,70 @@
 <html>
   	<head>
     	<meta charset="UTF-8" />
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
     	<title>ingredientMap</title>
-    	<!-- Latest compiled and minified CSS -->
-    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    	<!-- Bootstrap and Fontawesome CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+        <!-- Customized CSS -->
         <link rel="stylesheet" href="/stylesheets/style.css">
+
+        <!-- Javascript -->
         <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en"></script>
         <title>ingredientMap</title>
   	</head>
 	<body>
-  		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  			<div class="container">
-  				<div class="navbar-header">
-  					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-  						<span class="sr-only">Toggle navigation</span>
-  						<span class="icon-bar"></span>
-  						<span class="icon-bar"></span>
-  						<span class="icon-bar"></span>
-  					</button>
-  					<a href="/" class="navbar-brand">
-  						<span><img src="/images/brand/logo.svg" alt=""></span>
-  						&nbsp; ingredientMap
-  					</a>
-  				</div>
-  				<div id="navbar" class="collapse navbar-collapse">
-  					<ul class="nav navbar-nav">
-  						<li class="active"><a href="/">Home</a></li>
-  						<li><a href="/login">Explore</a></li>
-  						<li><a href="/reg">Test</a></li>
-  					</ul>
-  					<ul id="navbar-right" class="nav navbar-nav navbar-right">
-  						<% if (user) { %>
-                            <span><img src=<%= user.imgUrl.substring(user.imgUrl.indexOf("/image")) %> class="img-circle" id="portrait"></span>
-      						<li><a><%= user.name %></a></li>
-  							<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>
-    					<% } else { %>
-      						<li><a href="/reg"><span class="glyphicon glyphicon-user"></span> Sign up </a></li>
-  							<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
-    					<% } %>
-    				</ul>
-  				</div>
-  			</div>
+  		<nav class="navbar navbar-expand-md navbar-toggleable-md fixed-top navbar-light bg-light">
+            
+            <!-- logo and toggler-->
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#route_navbar" aria-expanded="false" aria-controls="route_navbar" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a href="/" class="navbar-brand mx-auto">
+				<span><img src="/images/brand/logo.svg" alt=""></span>
+				&nbsp; ingredientMap
+			</a>
+
+            <!-- navbar collapsed menu -->
+			<div id="route_navbar" class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link" href="/search">Search ingredients</a>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link" href="/reg">Plan meal</a>
+                    </li>
+                    <% if (user === undefined) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/reg"> Sign up </a>
+                            <span>or</span>
+                            <a class="nav-link" href="/login"> Login </a>
+                        </li>
+                    <% } %>
+				</ul>
+            </div>
+
+            <!-- user collapsed menu -->
+            <div id="user_navbar">
+                <div class="navbar-nav dropdown hidden-lg-up">
+                    <% if (user) { %>
+                        <a class="nav-link dropdown-toggle" href="http://example.com" id="user_dropdown_link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span><img src=<%= user.imgUrl.substring(user.imgUrl.indexOf("/image")) %> class="rounded-circle" id="portrait">
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="user_dropdown_link">
+                            <a class="dropdown-item" href="#">Manage</a>
+                            <a class="dropdown-item" href="/resetPassword">Reset password</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
   		</nav>

@@ -166,6 +166,10 @@ passwordInput.CustomValidation.validityChecks = passwordValidityChecks;
 passwordRepeatInput.CustomValidation = new CustomValidation(passwordRepeatInput);
 passwordRepeatInput.CustomValidation.validityChecks = passwordRepeatValidityChecks;
 
+/*----------------------------------
+	use event listener to show and hide corresponding input requirements
+----------------------------------*/
+
 
 
 /*----------------------------------

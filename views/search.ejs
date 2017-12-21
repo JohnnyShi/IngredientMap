@@ -1,0 +1,16 @@
+<%- include header %>
+<% if (success) { %>
+  <div><%= success %></div>
+<% } %>
+<% if (error) { %>
+  <div><%= error %> </div>
+<% } %>
+<div class="container">
+	<div id="map"></div>
+</div>
+<div class="container">
+</div>
+<%- include footer %>
+<script type="text/javascript" src="/javascripts/map.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUybdx8Ehje4-1g8lEO_IwQEe_1mPtr18&callback=initMap"
+async defer></script>

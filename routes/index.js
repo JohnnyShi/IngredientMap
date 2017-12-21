@@ -48,7 +48,7 @@ module.exports = function(app) {
         }
 
         // secret key
-        const secretKey = "6Lcq0TwUAAAAALFsshRJr6ypSZ50OzlPUUj4ufwV"; //localhost
+        const secretKey = "6LdYZD0UAAAAAC8Hog2Ynvoo6w8U1HR7PXWtaBjZ"; //localhost
 
         // verify url
         var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey 
@@ -106,8 +106,9 @@ module.exports = function(app) {
             title: 'login',
             user: req.session.user,
             success: req.flash('success').toString(),
-            error: req.flash('error').toString()});
+            error: req.flash('error').toString()
         });
+    });
     app.post('/login', function (req, res) {
         //generate md5 password
         var md5 = crypto.createHash('md5'),
@@ -131,5 +132,16 @@ module.exports = function(app) {
         req.session.user = null;
         req.flash('success', 'successfully logout!');
         res.redirect('/');
+    });
+    app.get('/search', function (req, res) {
+        res.render('search', {
+            title: 'search',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+    app.post('/search', function(req, res) {
+
     });
 };

@@ -1,3 +1,9 @@
+/***************************
+****************************
+Global Settings
+****************************
+***************************/
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -6,29 +12,36 @@
 
 body { 
     padding-top: 65px;
-    padding-left: 30px; 
+    /*padding-left: 30px; */
 }
 
+/***************************
+****************************
+These are the styles for
+the header section
+****************************
+***************************/
 
-/*navigation bar*/
+/*navbar-brand*/
 .navbar-brand {
     display:flex;
     align-items:center;
 }
 
-.navbar-right{
-	display: flex;
-	align-items:center;
-}
-
 .navbar-brand span img {
-	height: 30px;
+    height: 30px;
 	width: 30px;
 }
 
+/*navbar-user*/
 #portrait {
 	height: 30px;
 	width: 30px;
+}
+
+.user-dropdown {
+    height: 200px;
+    width: 100%;
 }
 
 
@@ -96,15 +109,15 @@ input::-webkit-caps-lock-indicator {
 
 /* Hide and show related .input-requirements when interacting with input */
 
-input:not([type="submit"]) + .input-requirements {
+.form-group > .input-requirements {
   overflow: hidden;
   max-height: 0;
   transition: max-height 1s ease-out;  
 }
 
-input:not([type="submit"]):hover + .input-requirements,
-input:not([type="submit"]):focus + .input-requirements,
-input:not([type="submit"]):active + .input-requirements {
+div:([class="form-group"]):hover > .input-requirements,
+div:([class="form-group"]):focus > .input-requirements,
+div:([class="form-group"]):active > .input-requirements {
   max-height: 1000px; /* any large number (bigger then the .input-requirements list) */
   transition: max-height 1s ease-in;
 }
@@ -122,69 +135,36 @@ input:not([type="submit"]):active + .input-requirements {
 	color: #e74c3c;
 }
 
+/*carousel*/
+/*.carousel {
+  	height:720px;
+  	margin-bottom: 60px;
+}*/
+
+/*.carousel .item {
+    width: 100%;
+    height: 500px;
+    background-color: #777;
+}*/
+
+/*.carousel-inner > .item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
+}*/
+
+#map {
+	height: 400px;
+	width: 300px;
+	float: left;
+}
+
 
 /*footer*/
-.footer {
+footer {
+	clear: both;
     height:50px;
-    margin:-50px 0 0;
     background:#ddd;
 }
-
-
-/*body {
-	width:600px;
-	margin:2em auto;
-	padding:0 2em;
-	font-size:14px;
-}
-
-p {
-	line-height:24px;
-	margin:1em 0;
-}
-
-header {
-	padding:.5em 0;
-	border-bottom:1px solid #cccccc;
-}
-
-nav {
-	float:left;
-	font-size:1.1em;
-	text-transform:uppercase;
-	margin-left:-12em;
-	width:9em;
-	text-align:right;
-}
-
-nav span a {
-	display:block;
-	text-decoration:none;
-	padding:.7em 1em;
-	color:#000000;
-}
-
-nav a:hover {
-	background-color:#ff0000;
-	color:#f9f9f9;
-	-webkit-transition:color .2s linear;
-}
-
-article {
-	font-size:16px;
-	padding-top:.5em;
-}
-
-article a {
-	color:#dd0000;
-	text-decoration:none;
-}
-
-article a:hover {
-	color:#333333;
-	text-decoration:underline;
-}
-
-.info {
-	font-size:14px;
-}*/
