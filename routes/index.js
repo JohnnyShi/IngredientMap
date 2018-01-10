@@ -141,7 +141,18 @@ module.exports = function(app) {
             error: req.flash('error').toString()
         });
     });
-    app.post('/search', function(req, res) {
+    app.post('/search', function (req, res) {
+
+    });
+    app.get('/resetpw', function (req, res) {
+        res.render('resetpw', {
+            title: 'resetPassword',
+            user: req.session.user,
+            success: req.flash('success').toString(),
+            error: req.flash('error').toString()
+        });
+    });
+    app.post('/resetpw', function (req, res) {
 
     });
 };

@@ -4,15 +4,15 @@ Global Settings
 ****************************
 ***************************/
 
-* {
+*, *:before, *:after{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-body { 
-    padding-top: 65px;
-    /*padding-left: 30px; */
+
+html, body { 
+    height: 100%;
 }
 
 /***************************
@@ -26,11 +26,22 @@ the header section
 .navbar-brand {
     display:flex;
     align-items:center;
+    font-family: 'Pacifico', Georgia, serif;
+    color: #9effd8;
 }
 
 .navbar-brand span img {
     height: 30px;
 	width: 30px;
+}
+
+#navbar_toggler_btn {
+    color: white;
+    outline: none;
+}
+
+nav {
+    height: 62px;
 }
 
 /*navbar-user*/
@@ -39,10 +50,10 @@ the header section
 	width: 30px;
 }
 
-.user-dropdown {
+/*.user-dropdown {
     height: 200px;
     width: 100%;
-}
+}*/
 
 
 /*registration form*/
@@ -135,30 +146,166 @@ div:([class="form-group"]):active > .input-requirements {
 	color: #e74c3c;
 }
 
-/*carousel*/
-/*.carousel {
-  	height:720px;
-  	margin-bottom: 60px;
-}*/
+/***************************
+****************************
+These are the styles for
+the index second screen section
+****************************
+***************************/
 
-/*.carousel .item {
+#second_screen {
+    background-image:url(../images/background/fruit_background.jpg);
+    height:1200px;
+    background-size:100%;
+    background-repeat: no-repeat;
+}
+
+
+/***************************
+****************************
+These are the styles for
+first screen video
+****************************
+***************************/
+.homepage-hero-module {
+    border-right: none;
+    border-left: none;
+    position: relative;
+    background-color: #000000;
+}
+.no-video .video-container video,
+.touch .video-container video {
+    display: none;
+}
+.no-video .video-container .poster,
+.touch .video-container .poster {
+    display: block !important;
+}
+.video-container {
+    position: relative;
+    bottom: 0%;
+    left: 0%;
+    height: 100%;
     width: 100%;
-    height: 500px;
-    background-color: #777;
-}*/
-
-/*.carousel-inner > .item > img {
+    overflow: hidden;
+    background: #000;
+}
+.video-container .poster img {
+    width: 100%;
+    bottom: 0;
     position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 500px;
-}*/
+}
+.video-container .filter {
+    z-index: 100;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+.video-container video {
+    position: absolute;
+    z-index: 0;
+    bottom: 0;
+}
+.video-container video.fillWidth {
+    width: 100%;
+}
+
+.video-annotation-layer{
+    width:100%;
+    height:100%;
+}
+#video-annotation-1{
+    position:absolute;
+    top:70%;
+    left:40%;
+    font-size:60px;
+    text-align:center;
+    font-family: 'Bitter', Georgia, serif;
+    color: #16f765;
+}
+#video-annotation-2{
+    position:absolute;
+    top:60%;
+    left:30%;
+    color:blue;
+    background-color:white;
+    font-size:40px;
+    text-align:center;
+}
+
+
+/***************************
+****************************
+These are the styles for
+map screen
+****************************
+***************************/
+
+#search_ingredients {
+    padding-top: 62px;
+}
 
 #map {
-	height: 400px;
-	width: 300px;
-	float: left;
+    width: 40%;
+    height: calc(100vh - 62px);
+    position: fixed;
+    float: left;
+}
+
+#map_handler {
+    width: 60%;
+    /*margin-left: 40%;*/
+    float: right;
+    /*overflow: scroll;*/
+    background-color: yellow;
+}
+
+.search-contents {
+    height: -webkit-calc(100vh - 62px - 50px);
+    height: -moz-calc(100vh - 62px - 50px);
+    height: calc(100vh - 62px - 50px);
+    overflow: scroll;
+}
+.food-search {
+    background-color: pink;
+}
+
+.food-search-result {
+    background-color: red;
+    min-height: 5px;
+}
+
+#food_search_engine h3 {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 0px;
+}
+
+.search_tags {
+    vertical-align: center;
+}
+
+#main_searchbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.search-button {
+    position: relative;
+    float: right;
+    margin-right: 8px;
+    margin-top: -33px;
+    z-index: 1;
+    border: none;
+    outline: none;
+    cursor:pointer;
+    color: black;
+}
+
+.search-button:focus {
+    border:none;
+    outline:none;
 }
 
 
@@ -167,4 +314,11 @@ footer {
 	clear: both;
     height:50px;
     background:#ddd;
+}
+
+.footer-sm {
+    /*float: right;*/
+    width: 100%;
+    height: 50px;
+    background-color: grey;
 }

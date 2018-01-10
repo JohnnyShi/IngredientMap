@@ -387,3 +387,13 @@ To check whether a specific key is pressed on keyboard, use `event.getModifierSt
 
 #### fetch vs ajax
 
+#### 12/30/2017
+
+Search ingredient module function lists:
+
+1. Search an ingredient
+2. Search a recipe
+
+#### 01/10/2018
+
+CSS Overflow: control the 

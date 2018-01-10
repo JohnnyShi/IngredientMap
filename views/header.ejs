@@ -6,66 +6,80 @@
         <meta name="description" content="">
         <meta name="author" content="">
     	<title>ingredientMap</title>
-    	<!-- Bootstrap and Fontawesome CSS -->
+    	<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
         <!-- Customized CSS -->
         <link rel="stylesheet" href="/stylesheets/style.css">
 
-        <!-- Javascript -->
+        <!-- Google Recaptcha -->
         <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+
+        <!-- jQuery library -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+        <!-- Bootstrap JavaScript -->
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+        <!-- Fontawesome CSS -->
+        <script type="text/javascript" src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+        <!-- Google Font CSS -->
+        <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
         <title>ingredientMap</title>
   	</head>
 	<body>
-  		<nav class="navbar navbar-expand-md navbar-toggleable-md fixed-top navbar-light bg-light">
-            
-            <!-- logo and toggler-->
-			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#route_navbar" aria-expanded="false" aria-controls="route_navbar" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<a href="/" class="navbar-brand mx-auto">
-				<span><img src="/images/brand/logo.svg" alt=""></span>
-				&nbsp; ingredientMap
-			</a>
+  		<nav class="navbar navbar-expand-md navbar-toggleable-md fixed-top navbar-trans">
+            <div class="container">
+                <!-- logo and toggler-->
+    			<button type="button" id="navbar_toggler_btn" class="navbar-toggler" data-toggle="collapse" data-target="#route_navbar" aria-expanded="false" aria-controls="route_navbar" aria-label="Toggle navigation">
+    				<i class="fas fa-bars"></i>
+    			</button>
+    			<a href="/" class="navbar-brand mx-auto">
+    				<span><img src="/images/brand/logo.svg" alt=""></span>
+    				&nbsp; ingredientMap
+    			</a>
 
-            <!-- navbar collapsed menu -->
-			<div id="route_navbar" class="collapse navbar-collapse">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-					<li class="nav-item">
-                        <a class="nav-link" href="/search">Search ingredients</a>
-                    </li>
-					<li class="nav-item">
-                        <a class="nav-link" href="/reg">Plan meal</a>
-                    </li>
-                    <% if (user === undefined) { %>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/reg"> Sign up </a>
-                            <span>or</span>
-                            <a class="nav-link" href="/login"> Login </a>
+                <!-- navbar collapsed menu -->
+    			<div id="route_navbar" class="collapse navbar-collapse">
+    				<ul class="navbar-nav mr-auto">
+    					<li class="nav-item active">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                         </li>
-                    <% } %>
-				</ul>
-            </div>
+    					<li class="nav-item">
+                            <a class="nav-link" href="/search">Search ingredients</a>
+                        </li>
+    					<li class="nav-item">
+                            <a class="nav-link" href="/reg">Plan meal</a>
+                        </li>
+                        <% if (user === undefined) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/reg"> Sign up </a>
+                                <span>or</span>
+                                <a class="nav-link" href="/login"> Login </a>
+                            </li>
+                        <% } %>
+    				</ul>
+                </div>
 
-            <!-- user collapsed menu -->
-            <div id="user_navbar">
-                <div class="navbar-nav dropdown hidden-lg-up">
-                    <% if (user) { %>
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="user_dropdown_link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span><img src=<%= user.imgUrl.substring(user.imgUrl.indexOf("/image")) %> class="rounded-circle" id="portrait">
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="user_dropdown_link">
-                            <a class="dropdown-item" href="#">Manage</a>
-                            <a class="dropdown-item" href="/resetPassword">Reset password</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
-                    <% } %>
+                <!-- user collapsed menu -->
+                <div id="user_navbar">
+                    <div class="navbar-nav dropdown hidden-lg-up">
+                        <% if (user) { %>
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="user_dropdown_link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span><img src=<%= user.imgUrl.substring(user.imgUrl.indexOf("/image")) %> class="rounded-circle" id="portrait">
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="user_dropdown_link">
+                                <a class="dropdown-item" href="#">Manage</a>
+                                <a class="dropdown-item" href="/resetPassword">Reset password</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
   		</nav>

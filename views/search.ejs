@@ -5,12 +5,59 @@
 <% if (error) { %>
   <div><%= error %> </div>
 <% } %>
-<div class="container">
-	<div id="map"></div>
+
+<div class="container_fluid" id="search_ingredients">
+	<div id="map">
+
+	</div>
+
+	<div id="map_handler" class="container_fluid">
+		<div class="container_fluid search-contents">
+			<div class="food-search container">
+				<form class="form-horizontal" id="food_search_engine" method="post">
+					<h3>Choose & Search</h3>
+					<div class="search_tags">
+						<span class="badge badge-info">Search by dish</span>
+						<span class="badge badge-info">Search by ingredients</span>
+						<span class="badge badge-info">Search a dish</span>
+						<span class="badge badge-info">Pair a wine</span>
+					</div>
+					<div id="main_searchbar">
+						<input type="search" class="form-control" id="ingredient" name="ingredient" placeholder="Enter some ingredients" required/>
+						<button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+					</div>
+				</form>
+			</div>
+			<div class="food-search-result container">
+				<h1>Hello</h1>
+				<h1>Hello</h1>
+				<h1>Hello</h1>
+				<h1>Hello</h1>
+				<h1>Hello</h1>
+				<h1>Hello</h1>
+				<h1>Hello</h1>
+				<h1>Hello</h1>
+			</div>
+		</div>
+		<div class="container_fluid footer-sm">
+			<div class="row">
+				<div class="col-sm-4 copyright">
+					<span>Copyright © 2017 Johnny Shi</span>
+				</div>
+				<div class="text-right col-sm-8">
+					<div class="links">
+						<a data-toggle="">
+						</a>
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+	
 </div>
-<div class="container">
-</div>
-<%- include footer %>
+
 <script type="text/javascript" src="/javascripts/map.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUybdx8Ehje4-1g8lEO_IwQEe_1mPtr18&callback=initMap"
 async defer></script>
+</body>
+</html>
